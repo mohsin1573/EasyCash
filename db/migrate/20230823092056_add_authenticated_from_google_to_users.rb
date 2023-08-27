@@ -3,3 +3,4 @@ class AddAuthenticatedFromGoogleToUsers < ActiveRecord::Migration[7.0]
     add_column :users, :authenticated_from_google, :boolean
   end
 end
+  

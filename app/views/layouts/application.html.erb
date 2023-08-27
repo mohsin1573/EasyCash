@@ -2,22 +2,25 @@
 <html>
   <head>
     <title>BankApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <%= stylesheet_link_tag 'devise_messages.css'%>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %> 
+    <%= csp_meta_tag %> 
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %> 
+    <%= javascript_importmap_tags%>
+     <%= stylesheet_link_tag 'devise_messages.css'%>
   </head>
 
   <body>
-  <% flash.each do |key, value| %>
-  <div class="alert <%= key == 'notice' ? 'devise-notice' : 'devise-alert' %>">
-    <%= value %>
-  </div>
-<% end %>
-
+    <div class="fixed-top">
+      <% flash.each do |key, value| %>
+      <div class="alert <%= key == 'notice' ? 'alert-success' : 'alert-danger' %> alert-dismissible fade show" role="alert">
+        <%= value %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <% end %>
+    </div>
 
     <%= yield %>
   </body>

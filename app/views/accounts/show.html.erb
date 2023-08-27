@@ -1,0 +1,8 @@
+<% if @user.user? %>
+  <%= render 'user' %>
+<% elsif @user.admin? %>
+  <%= render 'admin' %>
+<% elsif @user.superadmin? %>
+  <%= render 'superadmin' %>
+<% end %>
+    
