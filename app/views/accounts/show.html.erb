@@ -1,8 +1,11 @@
-<% if @user.user? %>
-  <%= render 'user' %>
-<% elsif @user.admin? %>
-  <%= render 'admin' %>
-<% elsif @user.superadmin? %>
-  <%= render 'superadmin' %>
-<% end %>
-    
+<h1>Your Account Details</h1>
+
+<p><strong>Name:</strong> <%= @account.firstname %> <%= @account.lastname %></p>
+<p><strong>Address:</strong> <%= @account.address %></p>
+<p><strong>Date of Birth:</strong> <%= @account.dob %></p>
+<p><strong>Phone:</strong> <%= @account.phone %></p>
+<p><strong>Gender:</strong> <%= @account.gender %></p>
+<p><strong>Current Balance:</strong> $<%= @account.balance %></p>
+
+<%= link_to 'Back to Dashboard', root_path %>
+<%= link_to 'Make Transaction', new_transaction_path, class: 'btn btn-primary' %>

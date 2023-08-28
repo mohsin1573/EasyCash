@@ -1,0 +1,21 @@
+<%= form_for(@transaction, url: transactions_path) do |f| %>
+
+  <%= f.hidden_field :transaction_type, value: action_name.capitalize %>
+<strong>Current Balance:</strong> $<%= current_user.account.balance %>
+  
+  <div class="field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :transaction_type %>
+    <%= f.select :transaction_type, ['Deposit', 'Withdraw'] %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Submit' %>
+  </div>
+<% end %>
+
+

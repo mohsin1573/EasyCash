@@ -1,0 +1,24 @@
+<%= form_for(@account) do |f| %>
+  <%= f.label :firstname %>
+  <%= f.text_field :firstname %>
+  
+  <%= f.label :lastname %>
+  <%= f.text_field :lastname %>
+  
+  <%= f.label :address %>
+  <%= f.text_area :address %>
+  
+  <%= f.label :dob %>
+  <%= f.date_field :dob %>
+  
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+  
+  <%= f.label :gender %>
+  <%= f.select :gender, ['Male', 'Female', 'Other'] %>
+  
+  <%= f.label :balance %>
+  <%= f.number_field :balance %>
+  
+  <%= f.submit 'Create Account' %>
+<% end %>

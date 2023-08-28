@@ -24,9 +24,14 @@
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav">
             <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Home</a></li>
-            <%if user_signed_in?%>
+            <%if user_signed_in? && current_user.account.present? %>
             <li class="nav-item" role="presentation">
-              <%= link_to 'Account', accounts_show_path, class:'nav-link active' %>
+              <%= link_to 'Account', account_path(current_user.account), class:'nav-link active' %>
+            </li>
+            <%end%>
+             <%if user_signed_in? && current_user.account.nil?%>
+            <li class="nav-item" role="presentation">
+              <%= link_to 'Create Account', new_account_path, class:'nav-link active' %>
             </li>
             <%end%>
             <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Security</a></li>
