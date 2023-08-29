@@ -35,6 +35,7 @@
 .header-blue .navbar .navbar-brand {
   font-weight: bold;
   color: inherit;
+  font-size: 30px;
 }
 
 .header-blue .navbar .navbar-brand:hover {
@@ -72,10 +73,15 @@
   background: none;
 }
 
-.header-blue .navbar .navbar-nav a.active,
-.header-blue .navbar .navbar-nav > .show .dropdown-item {
+.header-blue .navbar .navbar-nav a.active {
   background: none;
   box-shadow: none;
+  font-size: 15px;
+
+}
+
+.nav-link{
+  font-size: 15px;
 }
 
 @media (min-width: 768px) {
@@ -423,3 +429,4 @@ footer.nb-footer .copyright p {
 .navbar-dark .navbar-text a{
   padding: 12px;
 }
+

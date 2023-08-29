@@ -1,24 +1,51 @@
-<%= form_for(@account) do |f| %>
-  <%= f.label :firstname %>
-  <%= f.text_field :firstname %>
-  
-  <%= f.label :lastname %>
-  <%= f.text_field :lastname %>
-  
-  <%= f.label :address %>
-  <%= f.text_area :address %>
-  
-  <%= f.label :dob %>
-  <%= f.date_field :dob %>
-  
-  <%= f.label :phone %>
-  <%= f.text_field :phone %>
-  
-  <%= f.label :gender %>
-  <%= f.select :gender, ['Male', 'Female', 'Other'] %>
-  
-  <%= f.label :balance %>
-  <%= f.number_field :balance %>
-  
-  <%= f.submit 'Create Account' %>
-<% end %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with model: @account, url: accounts_path, method: :post, local: true, multipart: true do |f| %>
+        <div class="mb-3">
+          <%= f.label :firstname, class: "form-label" %>
+          <%= f.text_field :firstname, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :lastname, class: "form-label" %>
+          <%= f.text_field :lastname, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :address, class: "form-label" %>
+          <%= f.text_area :address, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :dob, class: "form-label" %>
+          <%= f.date_field :dob, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :phone, class: "form-label" %>
+          <%= f.text_field :phone, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :gender, class: "form-label" %>
+          <%= f.select :gender, ['Male', 'Female', 'Other'], class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :image, class: "form-label" %>
+          <%= f.file_field :image, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :balance, class: "form-label" %>
+          <%= f.number_field :balance, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.submit 'Create Account', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

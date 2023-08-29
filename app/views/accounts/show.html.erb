@@ -1,11 +1,98 @@
-<h1>Your Account Details</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <%= stylesheet_link_tag 'account.css'%>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container bootstrap snippets bootdey">
+      <div class="row">
+        <div class="profile-nav col-md-3">
+          <div class="panel">
+            <div class="user-heading round">
+              <a href="#">
+                <% if @account.image.attached? %> <%= image_tag @account.image
+                %> <% else %>
+                <p>No image uploaded.</p>
+                <% end %>
+              </a>
+              <h1><%= @account.firstname %></h1>
+              <p><%= current_user.email %></p>
+            </div>
 
-<p><strong>Name:</strong> <%= @account.firstname %> <%= @account.lastname %></p>
-<p><strong>Address:</strong> <%= @account.address %></p>
-<p><strong>Date of Birth:</strong> <%= @account.dob %></p>
-<p><strong>Phone:</strong> <%= @account.phone %></p>
-<p><strong>Gender:</strong> <%= @account.gender %></p>
-<p><strong>Current Balance:</strong> $<%= @account.balance %></p>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active">
+                    <%= link_to account_path(current_user.account) do %>
+                    <i class="bi bi-person-circle"></i> Profile
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to root_path do %>
+                    <i class="bi bi-house-door-fill"></i> Home Page
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to edit_account_path do %>
+                    <i class="bi bi-pencil-square"></i> Edit profile
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_transaction_path do %>
+                    <i class="bi bi-currency-dollar"></i> Make Transaction
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to transactions_path do %>
+                    <i class="bi bi-clock-history"></i> History
+                    <% end %>
+                </li>
+                <li>
+                    <%= button_to destroy_user_session_path, method: :delete do %>
+                    <i class="bi bi-box-arrow-left"></i> Logout
+                    <% end %>
+                </li>
+            </ul>
+          </div>
+        </div>
 
-<%= link_to 'Back to Dashboard', root_path %>
-<%= link_to 'Make Transaction', new_transaction_path, class: 'btn btn-primary' %>
+        <div class="panel">
+          <div class="bio-graph-heading">
+            Welcome to EasyCash, where your financial security is our top
+            priority. Experience seamless banking with innovative features and
+            robust security measures
+          </div>
+          <div class="panel-body bio-graph-info">
+            <h1>Your Account Details</h1>
+            <div class="row">
+              <div class="bio-row">
+                <p><span>First Name </span>: <%= @account.firstname %></p>
+              </div>
+              <div class="bio-row">
+                <p><span>Last Name </span>: <%= @account.lastname %></p>
+              </div>
+              <div class="bio-row">
+                <p><span>Address </span>: <%= @account.address %></p>
+              </div>
+              <div class="bio-row">
+                <p><span>Birthday</span>: <%= @account.dob %></p>
+              </div>
+              <div class="bio-row">
+                <p><span>Gender </span>: <%= @account.gender %></p>
+              </div>
+              <div class="bio-row">
+                <p><span>Mobile </span>: <%= @account.phone %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

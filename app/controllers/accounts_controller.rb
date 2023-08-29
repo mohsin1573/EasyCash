@@ -18,9 +18,19 @@ class AccountsController < ApplicationController
     end
   end
 
+  def update
+    @account = Account.find(params[:id])
+  
+    if @account.update(account_params)
+      redirect_to root_path, notice: 'Account details updated successfully.'
+    else
+      render :edit
+    end
+  end
+
   private
 
   def account_params
-    params.require(:account).permit(:firstname, :lastname, :address, :dob, :phone, :gender, :balance)
+    params.require(:account).permit(:firstname, :lastname, :address, :dob, :phone, :gender, :balance, :image  )
   end
 end
