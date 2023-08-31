@@ -8,8 +8,12 @@ class TransactionsController < ApplicationController
     def create
       @transaction = current_user.transactions.build(transaction_params)
       @transaction.account = current_user.account
+
+      
     
       if @transaction.save
+        # Enqueue the email notification job
+        TransactionMailer.transaction_notification(current_user, @transaction, current_user.account).deliver_now
         if @transaction.transaction_type == "Deposit"
           current_user.account.update(balance: current_user.account.balance + @transaction.amount)
         elsif @transaction.transaction_type == "Withdraw"

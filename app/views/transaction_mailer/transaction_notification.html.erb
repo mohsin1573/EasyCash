@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Transaction Notification</title>
+</head>
+<body>
+
+  <p>Hello <%= @account.firstname %>,</p>
+  <p>You have successfully made a <%= @transaction.transaction_type.downcase %> of $<%= @transaction.amount %>.</p>
+  <p>Your new balance is $<%= @user.account.balance %>.</p>
+  <p>Transaction Date: <%= @transaction.created_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+  <p>Thank you for using our service.</p>
+</body>
+</html>

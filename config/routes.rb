@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   # get 'accounts/show'
   resources :accounts
   resources :transactions, only: [:new, :create, :index]
-
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
   devise_for :users,  controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users, only: [:create]
   # get 'user/account', to: 'user_accounts#show', as: :user_account
