@@ -77,3 +77,4 @@ gem "omniauth-rails_csrf_protection"
 gem "sidekiq"
 gem 'letter_opener'
 
+gem 'cancancan'

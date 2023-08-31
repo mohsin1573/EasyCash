@@ -1,0 +1,23 @@
+
+<h1>Account Details - <%= @user.email %></h1>
+<h2>Transaction History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Back to Admin Accounts', admin_accounts_path %>
