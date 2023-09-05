@@ -1,22 +1,25 @@
-<h1>Admin Dashboard - User Accounts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+<div class="container mt-5">
+  <h1 class="mb-4">Admin Dashboard - User Accounts</h1>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
       <tr>
-        <td><%= user.email %></td>
-        <td>
-          <%= link_to 'View Account', admin_account_path(user.account) %>
-          <%= link_to 'Edit Account', edit_admin_account_path(user.account) %>
-        <%= link_to 'Delete Account', destroy_account_path(user.account), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
+        <th>Email</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td>
+            <div class="btn-group" role="group">
+              <%= link_to 'View Account', admin_account_path(user.account), class: 'btn btn-primary btn-sm mr-1' %>
+              <%= link_to 'Edit Account', edit_admin_account_path(user.account), class: 'btn btn-warning btn-sm mr-1' %>
+              <%# <%= link_to 'Delete Account', destroy_account_path(user.account), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

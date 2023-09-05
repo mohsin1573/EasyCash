@@ -7,9 +7,15 @@ class Admin::AccountsController < ApplicationController
     end
   
     def show
-        @account = Account.find(params[:id])
-        @user = @account.user
+      @account = Account.find(params[:id])
+  
+      # Now that @account is loaded, you can access its associated user
+      @user = @account.user
+      
+      # Fetch all accounts associated with the user
+      @accounts = Account.where(user_id: @user.id)
     end
+    
   
     def edit
         @account = Account.find(params[:id])

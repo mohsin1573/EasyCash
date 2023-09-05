@@ -1,23 +1,91 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Account Details - <%= @user.email %></h1>
+  <h2 class="mb-3">Transaction History</h2>
 
-<h1>Account Details - <%= @user.email %></h1>
-<h2>Transaction History</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Amount</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user.transactions.each do |transaction| %>
+  <table class="table table-striped">
+    <thead class="thead-dark">
       <tr>
-        <td><%= transaction.transaction_type %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Date</th>
       </tr>
+    </thead>
+    <tbody>
+      <% @user.transactions.each do |transaction| %>
+        <tr>
+          <td><%= transaction.transaction_type %></td>
+          <td><%= transaction.amount %></td>
+          <td><%= transaction.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="bubble-chart mt-5">
+    <% @accounts.each do |account| %>
+      <div id="bubble-chart-<%= account.user.id %>" class="bubble-chart-container"></div>
     <% end %>
-  </tbody>
-</table>
-<%= link_to 'Back to Admin Accounts', admin_accounts_path %>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  <% @accounts.each do |account| %> 
+    var data<%= account.user.id %> = [
+      <% account.transactions.each do |transaction| %>
+        { amount: <%= transaction.amount %>, type: '<%= transaction.transaction_type %>', time: '<%= transaction.created_at %>' },
+      <% end %>
+    ];
+
+    var margin = { top: 20, right: 20, bottom: 70, left: 40 };
+    var width = 800 - margin.left - margin.right;
+    var height = 400 - margin.top - margin.bottom;
+
+    var xScale<%= account.user.id %> = d3.scaleBand()
+      .domain(data<%= account.user.id %>.map(function(d) { return d.type; }))
+      .range([0, width]);
+
+    var yScale<%= account.user.id %> = d3.scaleLinear()
+      .domain([0, d3.max(data<%= account.user.id %>, function(d) { return d.amount; })])
+      .range([height, 0]);
+
+    var rScale<%= account.user.id %> = d3.scaleLinear()
+      .domain([0, d3.max(data<%= account.user.id %>, function(d) { return d.amount; })])
+      .range([5, 20]);
+
+    var svg<%= account.user.id %> = d3.select("#bubble-chart-<%= account.user.id %>")
+      .append("svg")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom))
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // Create x-axis
+    svg<%= account.user.id %>.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xScale<%= account.user.id %>))
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", "rotate(-45)");
+
+    // Create y-axis
+    svg<%= account.user.id %>.append("g")
+      .call(d3.axisLeft(yScale<%= account.user.id %>));
+
+    svg<%= account.user.id %>.selectAll("circle")
+      .data(data<%= account.user.id %>)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) { return xScale<%= account.user.id %>(d.type); })
+      .attr("cy", function(d) { return yScale<%= account.user.id %>(d.amount); })
+      .attr("r", function(d) { return rScale<%= account.user.id %>(d.amount); })
+      .style("fill", function(d) { return d.type === 'Deposit' ? 'blue' : 'red'; });
+  <% end %>
+});
+</script>
+
+<%= link_to 'All Users', admin_accounts_path, class: 'btn btn-primary mt-4' %>
