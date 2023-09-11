@@ -5,5 +5,4 @@ class TransactionMailer < ApplicationMailer
       @account = account
       mail(to: @user.email, subject: 'Transaction Notification')
     end
-  end
-  
+ end

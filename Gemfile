@@ -78,3 +78,5 @@ gem "sidekiq"
 gem 'letter_opener'
 
 gem 'cancancan'
+
+gem 'httparty'

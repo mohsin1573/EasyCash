@@ -9,10 +9,8 @@ class Admin::AccountsController < ApplicationController
     def show
       @account = Account.find(params[:id])
   
-      # Now that @account is loaded, you can access its associated user
-      @user = @account.user
       
-      # Fetch all accounts associated with the user
+      @user = @account.user
       @accounts = Account.where(user_id: @user.id)
     end
     
